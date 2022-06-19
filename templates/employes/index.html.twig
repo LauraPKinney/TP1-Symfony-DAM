@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employé{% endblock %}
+
+{% block body %}
+    <h1 class="center">Coordonnées des Employés</h1>
+
+    <table class="table table-info table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>Poste</th>
+                <th>Salaire</th>
+                <th>Date De Naissance</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employe in employes %}
+            <tr>
+                <td>{{ employe.id }}</td>
+                <td>{{ employe.prenom }}</td>
+                <td>{{ employe.nom }}</td>
+                <td>{{ employe.telephone }}</td>
+                <td>{{ employe.Email }}</td>
+                <td>{{ employe.adresse }}</td>
+                <td>{{ employe.poste }}</td>
+                <td>{{ employe.salaire }}</td>
+                <td>{{ employe.dateDeNaissance ? employe.dateDeNaissance|date('d-M-Y') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_employes_show', {'id': employe.id}) }}">voir</a>
+                    <a href="{{ path('app_employes_edit', {'id': employe.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Pas d'information trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employes_new') }}"class="center">Entrée un nouvel employé</a>
+{% endblock %}
